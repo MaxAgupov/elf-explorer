@@ -3,5 +3,8 @@ project (elf_expolorer)
 
 set (CMAKE_INCLUDE_CURRENT_DIR on)
 set (CMAKE_BUILD_TYPE Debug)
-	
+
+
 add_executable(elf_explorer main.cpp)
+target_link_libraries(elf_explorer ncurses)
+
