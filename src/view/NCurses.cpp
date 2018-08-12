@@ -17,6 +17,8 @@ void NCurses::init() {
     cbreak();
     curs_set(0);
     keypad(stdscr, true);
+
+    refresh();
 }
 
 void NCurses::end() {
@@ -24,7 +26,16 @@ void NCurses::end() {
 }
 
 void NCurses::loop() {
+
     getch();
+}
+
+int NCurses::screen_width() {
+    return COLS;
+}
+
+int NCurses::screen_height() {
+    return LINES;
 }
 
 

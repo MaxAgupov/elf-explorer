@@ -2,8 +2,8 @@
 // Created by magupov on 10.08.18.
 //
 
-#ifndef ELF_EXPOLORER_APP_H
-#define ELF_EXPOLORER_APP_H
+#ifndef ELF_EXPLORER_APP_H
+#define ELF_EXPLORER_APP_H
 
 
 class App {
@@ -14,4 +14,4 @@ public:
 };
 
 
-#endif //ELF_EXPOLORER_APP_H
+#endif //ELF_EXPLORER_APP_H

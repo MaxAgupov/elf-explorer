@@ -1,5 +1,5 @@
 cmake_minimum_required (VERSION 3.5)
-project (elf_expolorer)
+project (elf_explorer)
 
 set (BINARY_DIR bin)
 

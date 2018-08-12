@@ -2,8 +2,8 @@
 // Created by max on 10.08.18.
 //
 
-#ifndef ELF_EXPOLORER_NCURSES_H
-#define ELF_EXPOLORER_NCURSES_H
+#ifndef ELF_EXPLORER_NCURSES_H
+#define ELF_EXPLORER_NCURSES_H
 
 
 class NCurses {
@@ -16,7 +16,11 @@ public:
     void loop();
 
     void end();
+
+    int screen_width();
+    int screen_height();
+
 };
 
 
-#endif //ELF_EXPOLORER_NCURSES_H
+#endif //ELF_EXPLORER_NCURSES_H
