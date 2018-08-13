@@ -12,15 +12,21 @@
 
 class ItemContent;
 
+class ItemContent {
+public:
+    ItemContent() {}
+    virtual ~ItemContent(){}
+};
+
 class ListMenuItem {
 public:
     ListMenuItem(const std::string &full_label, ItemContent *content);
 
-    std::string getLabel() const {
+    virtual std::string getLabel() const {
         return full_label;
     }
 
-    std::string getLabel(size_t size) const {
+    virtual std::string getLabel(size_t size) const {
         if (full_label.size() < size) {
             return full_label.substr(0, size) + std::string (size - full_label.size(), ' ');
         } else if (full_label.size() > size) {
@@ -44,21 +50,34 @@ public:
     ListMenu(int width, int height, int startx, int starty);
     virtual ~ListMenu();
 
+
     void render();
 
     bool run();
 
+    ItemContent *getChosenItem();
+
+protected:
     void handleUp();
+
     void handleDown();
 
+    virtual bool handleEnter();
+
     void addItem(const std::string &label, ItemContent *item);
-    ItemContent *getChosenItem();
+
+    void cleanScreen();
+
+    virtual void preRenderItem(ListMenuItem* item);
+
+    virtual void postRenderItem(ListMenuItem* item);
 
 private:
     std::list<ListMenuItem*> full_list;
     std::list<ListMenuItem*>::iterator chosen_item;
 
     int first_visible_item;
+    int max_visible_size;
     int visible_size;
     int highlighted;
 
