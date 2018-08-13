@@ -16,7 +16,6 @@ void NCurses::init() {
     noecho();
     cbreak();
     raw();
-    nonl();
     curs_set(0);
     keypad(stdscr, true);
 

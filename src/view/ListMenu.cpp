@@ -45,7 +45,7 @@ void ListMenu::render() {
 
     // control buttons
     wattron(menu, A_REVERSE);
-    mvwprintw(menu, height - 2, 1, string(width - 2, ' ').c_str());
+    mvwprintw(menu, height - 2, 1, (string ("F10-Exit") + string(width - 2 - 8, ' ')).c_str());
     wattroff(menu, A_REVERSE);
     Menu::render();
 }
@@ -62,6 +62,7 @@ bool ListMenu::run() {
             case KEY_DOWN:
                 handleDown();
                 break;
+            case '\n':
             case KEY_ENTER:
                 result = handleEnter();
                 if (result) {
