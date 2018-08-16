@@ -71,6 +71,7 @@ void FileMenu::load_directory_content(string dir_name) {
     for (auto it = content.begin(); it != content.end(); ++it) {
         addItem((*it)->name, (*it));
     }
+    sortItems();
 }
 
 bool FileMenu::handleEnter() {
@@ -120,3 +121,30 @@ void FileMenu::preRenderItem(ListMenuItem *item) {
 void FileMenu::postRenderItem(ListMenuItem *item) {
     wattroff(menu, A_BOLD);
 }
+
+void FileMenu::sortItems() {
+    full_list.sort([](ListMenuItem* lv, ListMenuItem *rv) {
+        if (lv->getLabel() == "..") {
+            return true;
+        }
+        if (rv->getLabel() == "..") {
+            return false;
+        }
+        DirEntry *lentry = dynamic_cast<DirEntry*>(lv->getContent());
+        DirEntry *rentry = dynamic_cast<DirEntry*>(rv->getContent());
+
+        if (lentry->type == rentry->type) {
+            return lv->getLabel().compare(rv->getLabel()) < 0;
+        } else {
+            if (lentry->type == DT_DIR) {
+                return true;
+            } else if (rentry->type == DT_DIR) {
+                return false;
+            } else {
+                return lv->getLabel().compare(rv->getLabel()) < 0;
+            }
+        }
+
+    });
+}
+

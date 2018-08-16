@@ -37,6 +37,8 @@ protected:
 
     void preRenderItem(ListMenuItem *item);
     void postRenderItem(ListMenuItem *item);
+
+    void sortItems();
 private:
     std::string current_dir;
 

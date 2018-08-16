@@ -68,11 +68,13 @@ protected:
 
     void cleanScreen();
 
+    virtual void sortItems();
+
     virtual void preRenderItem(ListMenuItem* item);
 
     virtual void postRenderItem(ListMenuItem* item);
 
-private:
+protected:
     std::list<ListMenuItem*> full_list;
     std::list<ListMenuItem*>::iterator chosen_item;
 

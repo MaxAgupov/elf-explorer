@@ -45,7 +45,7 @@ void ListMenu::render() {
 
     // control buttons
     wattron(menu, A_REVERSE);
-    mvwprintw(menu, height - 2, 1, (string ("F10-Exit") + string(width - 2 - 8, ' ')).c_str());
+    mvwprintw(menu, height - 2, 1, (string ("<Enter>-Choose | F10-Exit") + string(width - 2 - 25, ' ')).c_str());
     wattroff(menu, A_REVERSE);
     Menu::render();
 }
@@ -110,9 +110,6 @@ void ListMenu::addItem(const string &label, ItemContent *item) {
         visible_size++;
     }
     full_list.push_back(new ListMenuItem(label, item));
-    full_list.sort([](ListMenuItem* litem, ListMenuItem *ritem){
-        return litem->getLabel().compare(ritem->getLabel()) < 0;
-    });
 }
 
 ItemContent *ListMenu::getChosenItem() {
@@ -147,6 +144,12 @@ void ListMenu::preRenderItem(ListMenuItem *item) {
 }
 
 void ListMenu::postRenderItem(ListMenuItem *item) {
+}
+
+void ListMenu::sortItems() {
+    full_list.sort([](ListMenuItem* litem, ListMenuItem *ritem){
+        return litem->getLabel().compare(ritem->getLabel()) < 0;
+    });
 }
 
 ListMenuItem::ListMenuItem(const std::string &full_label, ItemContent *content)
