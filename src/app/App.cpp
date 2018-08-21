@@ -18,7 +18,6 @@ App::App(int argc, char **argv) {
 int App::run() {
     NCurses main_view;
 
-
     main_view.init();
 
     FileMenu *menu = new FileMenu(main_view.screen_width()/2,
@@ -33,11 +32,14 @@ int App::run() {
     refresh();
 
     bool result = menu->run();
+    if (result) {
+        string chosen_filename = menu->getChosenFileName();
+
+    }
 
     delete menu;
     refresh();
     main_view.loop();
-
 
     main_view.end();
     return 0;

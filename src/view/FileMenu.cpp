@@ -46,10 +46,6 @@ bool FileMenu::run() {
     return res;
 }
 
-void FileMenu::render() {
-    ListMenu::render();
-}
-
 void FileMenu::load_directory_content(string dir_name) {
     DIR *dir = opendir(dir_name.c_str());
     if (dir == NULL) {
@@ -82,6 +78,7 @@ bool FileMenu::handleEnter() {
     }
 
     if (entry->name == "..") {
+        // go to the parent dir
         size_t pos = current_dir.rfind('/');
         if (pos != 0){
             current_dir = current_dir.substr(0, pos);
@@ -90,10 +87,13 @@ bool FileMenu::handleEnter() {
         }
         clearContent();
         load_directory_content(current_dir);
-    } else if (entry->type == DT_DIR){
+    } else if (entry->type == DT_DIR) {
+        // enter the chosen dir
         current_dir = current_dir + "/" + entry->name;
         clearContent();
         load_directory_content(current_dir);
+    } else {
+        return true;
     }
 
     return false;
@@ -146,5 +146,15 @@ void FileMenu::sortItems() {
         }
 
     });
+}
+
+std::string FileMenu::getChosenFileName() const {
+    DirEntry *entry = dynamic_cast<DirEntry*>(getChosenItem());
+
+    if (entry == nullptr) {
+        return std::string();
+    }
+
+    return current_dir + "/" + entry->name;
 }
 

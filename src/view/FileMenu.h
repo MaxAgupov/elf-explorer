@@ -24,21 +24,19 @@ public:
     ~FileMenu();
 
     bool run();
+    std::string getChosenFileName() const;
 
 protected:
-    void render();
+
 
     void load_directory_content(std::string dir_name);
-
-    bool handleEnter();
-
 protected:
-    void clearContent();
-
     void preRenderItem(ListMenuItem *item);
     void postRenderItem(ListMenuItem *item);
-
+    void clearContent();
     void sortItems();
+
+    bool handleEnter();
 private:
     std::string current_dir;
 

@@ -112,7 +112,7 @@ void ListMenu::addItem(const string &label, ItemContent *item) {
     full_list.push_back(new ListMenuItem(label, item));
 }
 
-ItemContent *ListMenu::getChosenItem() {
+ItemContent *ListMenu::getChosenItem() const {
     int index = 0;
     for (auto it = full_list.begin(); it != full_list.end(); ++it, ++index) {
         if (index == first_visible_item + highlighted) {

@@ -36,7 +36,7 @@ public:
         }
     }
 
-    ItemContent* getContent() {
+    ItemContent* getContent() const {
         return content;
     }
 
@@ -50,29 +50,30 @@ public:
     ListMenu(int width, int height, int startx, int starty);
     virtual ~ListMenu();
 
-
-    void render();
-
     bool run();
 
-    ItemContent *getChosenItem();
+    ItemContent *getChosenItem() const;
 
 protected:
-    void handleUp();
-
-    void handleDown();
-
-    virtual bool handleEnter();
-
     void addItem(const std::string &label, ItemContent *item);
 
-    void cleanScreen();
+    virtual void handleUp();
+
+    virtual void handleDown();
+
+    virtual bool handleEnter();
 
     virtual void sortItems();
 
     virtual void preRenderItem(ListMenuItem* item);
 
     virtual void postRenderItem(ListMenuItem* item);
+
+protected:
+    void cleanScreen();
+
+private:
+    void render();
 
 protected:
     std::list<ListMenuItem*> full_list;
