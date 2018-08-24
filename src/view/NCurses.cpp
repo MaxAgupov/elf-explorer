@@ -8,7 +8,11 @@
 
 
 NCurses::NCurses() {
+    init();
+}
 
+NCurses::~NCurses() {
+    end();
 }
 
 void NCurses::init() {

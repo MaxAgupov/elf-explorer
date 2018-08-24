@@ -1,2 +1,2 @@
-add_library(view STATIC NCurses.cpp Menu.cpp Menu.h ListMenu.cpp ListMenu.h FileMenu.cpp FileMenu.h Window.cpp Widget.cpp Widget.h MainWindow.cpp MainWindow.h)
+add_library(view STATIC NCurses.cpp Menu.cpp Menu.h ListMenu.cpp ListMenu.h FileMenu.cpp FileMenu.h Window.cpp Widget.cpp Widget.h DisplayManager.cpp DisplayManager.h)
 target_link_libraries(view ncurses)

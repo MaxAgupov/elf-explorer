@@ -33,6 +33,8 @@ bool Window::run() {
         switch(getCh()) {
             case KEY_F(10):
                 exit = true;
+                result = true;
+                break;
             default:
                 break;
         }

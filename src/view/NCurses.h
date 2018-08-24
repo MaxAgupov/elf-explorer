@@ -10,6 +10,7 @@ class NCurses {
 
 public:
     NCurses();
+    ~NCurses();
 
     void init();
 
