@@ -114,12 +114,12 @@ void FileMenu::preRenderItem(ListMenuItem *item) {
         return;
     }
     if (entry->type == DT_DIR) {
-        wattron(menu, A_BOLD);
+        onAttribute(A_BOLD);
     }
 }
 
 void FileMenu::postRenderItem(ListMenuItem *item) {
-    wattroff(menu, A_BOLD);
+    offAttribute(A_BOLD);
 }
 
 void FileMenu::sortItems() {

@@ -17,7 +17,7 @@ ListMenu::ListMenu(int width, int height, int startx, int starty)
     highlighted = 0;
 
     chosen_item = full_list.end();
-    keypad(menu, true);
+
 }
 
 void ListMenu::render() {
@@ -25,12 +25,13 @@ void ListMenu::render() {
     for (auto it = full_list.begin(); it != full_list.end(); ++it, ++index) {
         if (index >= first_visible_item) {
             if (first_visible_item + highlighted == index) {
-                wattron(menu, A_REVERSE);
+                onAttribute(A_REVERSE);
             }
             preRenderItem(*it);
-            mvwprintw(menu, index -first_visible_item + 1, 1, (*it)->getLabel(width-2).c_str());
+//            mvwprintw(menu, index -first_visible_item + 1, 1, (*it)->getLabel(width-2).c_str());
+            drawLine(1, index -first_visible_item + 1, (*it)->getLabel(width-2));
             postRenderItem(*it);
-            wattroff(menu, A_REVERSE);
+            offAttribute(A_REVERSE);
         }
         if (index >= first_visible_item + visible_size - 1) {
             break;
@@ -39,14 +40,17 @@ void ListMenu::render() {
 
     if (visible_size != max_visible_size) {
         for (int i = visible_size+1; i <= max_visible_size; ++i) {
-            mvwprintw(menu, i, 1, string(width-2, ' ').c_str());
+//            mvwprintw(menu, i, 1, string(width-2, ' ').c_str());
+            drawLine(1, i, string(width-2, ' '));
         }
     }
 
     // control buttons
-    wattron(menu, A_REVERSE);
-    mvwprintw(menu, height - 2, 1, (string ("<Enter>-Choose | F10-Exit") + string(width - 2 - 25, ' ')).c_str());
-    wattroff(menu, A_REVERSE);
+    onAttribute(A_REVERSE);
+//    mvwprintw(menu, height - 2, 1, (string ("<Enter>-Choose | F10-Exit") + string(width - 2 - 25, ' ')).c_str());
+    drawLine(1, height - 2, (string ("<Enter>-Choose | F10-Exit") + string(width - 2 - 25, ' ')));
+    offAttribute(A_REVERSE);
+
     Menu::render();
 }
 
@@ -55,7 +59,7 @@ bool ListMenu::run() {
     bool exit = false;
     while (!exit) {
         render();
-        switch(wgetch(menu)) {
+        switch(getCh()) {
             case KEY_UP:
                 handleUp();
                 break;

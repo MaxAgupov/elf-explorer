@@ -6,24 +6,16 @@
 #define ELF_EXPLORER_MENU_H
 
 #include <ncurses.h>
-#include <string>
+#include <view/Widget.h>
 
-
-class Menu {
+class Menu : public Widget {
 public:
     Menu(int width, int height, int startx, int starty);
-
     virtual ~Menu();
 
     virtual bool run() = 0;
     virtual void render();
 
-protected:
-    WINDOW *menu;
-    int width;
-    int height;
-    int startx;
-    int starty;
 };
 
 
