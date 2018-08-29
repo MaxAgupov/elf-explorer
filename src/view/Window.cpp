@@ -47,7 +47,6 @@ bool Window::run() {
 
 void Window::openFile(const std::string &fileName) {
     if (fileName.empty()) {
-        // set header
         header = "Need to choose file";
         return;
     }

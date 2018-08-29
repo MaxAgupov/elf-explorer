@@ -20,10 +20,8 @@ public:
 protected:
     void chooseFile(std::string &chosen_file);
 
-
 private:
     NCurses *ncurses;
-    bool is_shown;
 };
 
 

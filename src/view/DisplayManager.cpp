@@ -9,8 +9,7 @@
 #include <view/Window.h>
 #include <view/FileMenu.h>
 
-DisplayManager::DisplayManager()
-    : is_shown(false) {
+DisplayManager::DisplayManager() {
     ncurses = new NCurses();
 }
 
@@ -19,7 +18,8 @@ DisplayManager::~DisplayManager() {
 }
 
 void DisplayManager::show() {
-    is_shown = true;
+    bool is_shown = true;
+    bool choose_file = false;
 
     std::string analysed_file_name;
 
@@ -27,12 +27,15 @@ void DisplayManager::show() {
 
     do {
         win->render();
-
-        if (analysed_file_name.empty()) {
+        if (choose_file) {
+            choose_file = false;
             chooseFile(analysed_file_name);
             win->openFile(analysed_file_name);
         } else {
             switch (win->getCh()) {
+                case KEY_F(2):
+                    choose_file = true;
+                    break;
                 case KEY_F(10):
                     is_shown = false;
                     break;
