@@ -33,7 +33,8 @@ void Widget::drawLine(int x_pos, int y_pos, const std::string &line) {
 }
 
 int Widget::getCh() {
-    return wgetch(widget);
+    return getch();
+//    return wgetch(widget);
 }
 
 void Widget::drawFrame() {

@@ -15,6 +15,10 @@ public:
     virtual bool run();
     virtual void render();
 
+    void openFile(const std::string &fileName);
+
+protected:
+    std::string header;
 };
 
 

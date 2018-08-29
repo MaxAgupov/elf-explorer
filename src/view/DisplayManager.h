@@ -5,6 +5,8 @@
 #ifndef ELF_EXPLORER_MAINWINDOW_H
 #define ELF_EXPLORER_MAINWINDOW_H
 
+#include <string>
+
 class NCurses;
 
 
@@ -14,6 +16,10 @@ public:
     ~DisplayManager();
 
     void show();
+
+protected:
+    void chooseFile(std::string &chosen_file);
+
 
 private:
     NCurses *ncurses;
