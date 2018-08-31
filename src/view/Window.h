@@ -7,6 +7,8 @@
 
 #include <view/Widget.h>
 
+class Analyser;
+
 class Window : public Widget {
 public:
     Window(int width, int height, int startx, int starty);
@@ -19,6 +21,7 @@ public:
 
 protected:
     std::string header;
+    Analyser *analyser;
 };
 
 
