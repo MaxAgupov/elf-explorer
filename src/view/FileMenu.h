@@ -5,7 +5,7 @@
 #ifndef ELF_EXPLORER_FILEMENU_H
 #define ELF_EXPLORER_FILEMENU_H
 
-#include "ListMenu.h"
+#include "ListPanel.h"
 #include <string>
 #include <vector>
 
@@ -17,7 +17,7 @@ public:
 };
 
 
-class FileMenu : public ListMenu {
+class FileMenu : public ListPanel {
 public:
     FileMenu(int width, int height, int startx, int starty);
 

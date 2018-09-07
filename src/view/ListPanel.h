@@ -5,7 +5,7 @@
 #ifndef ELF_EXPLORER_SIMPLELISTMENU_H
 #define ELF_EXPLORER_SIMPLELISTMENU_H
 
-#include "Menu.h"
+#include <view/Widget.h>
 #include <string>
 #include <vector>
 #include <list>
@@ -45,10 +45,10 @@ private:
     ItemContent *content;
 };
 
-class ListMenu : public Menu {
+class ListPanel : public Widget {
 public:
-    ListMenu(int width, int height, int startx, int starty);
-    virtual ~ListMenu();
+    ListPanel(int width, int height, int startx, int starty);
+    virtual ~ListPanel();
 
     bool run();
 

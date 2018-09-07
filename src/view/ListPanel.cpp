@@ -3,14 +3,14 @@
 //
 
 #include <algorithm>
-#include "ListMenu.h"
+#include "ListPanel.h"
 
 #include <iostream>
 
 using namespace std;
 
-ListMenu::ListMenu(int width, int height, int startx, int starty)
- : Menu(width, height, startx, starty){
+ListPanel::ListPanel(int width, int height, int startx, int starty)
+ : Widget(width, height, startx, starty){
     first_visible_item = 0;
     max_visible_size = height - 3;
     visible_size = 0;
@@ -20,7 +20,7 @@ ListMenu::ListMenu(int width, int height, int startx, int starty)
 
 }
 
-void ListMenu::render() {
+void ListPanel::render() {
     drawFrame();
     int index = 0;
     for (auto it = full_list.begin(); it != full_list.end(); ++it, ++index) {
@@ -50,10 +50,10 @@ void ListMenu::render() {
     drawLine(1, height - 2, (descr + string(width - 2 - descr.size(), ' ')));
     offAttribute(A_REVERSE);
 
-    Menu::render();
+    Widget::render();
 }
 
-bool ListMenu::run() {
+bool ListPanel::run() {
     bool result = false;
     bool exit = false;
     while (!exit) {
@@ -81,7 +81,7 @@ bool ListMenu::run() {
     return result;
 }
 
-void ListMenu::handleUp() {
+void ListPanel::handleUp() {
     if (full_list.empty()) {
         first_visible_item = 0;
         highlighted = 0;
@@ -94,7 +94,7 @@ void ListMenu::handleUp() {
     }
 }
 
-void ListMenu::handleDown() {
+void ListPanel::handleDown() {
     if (full_list.empty()) {
         first_visible_item = 0;
         highlighted = 0;
@@ -108,14 +108,14 @@ void ListMenu::handleDown() {
     }
 }
 
-void ListMenu::addItem(const string &label, ItemContent *item) {
+void ListPanel::addItem(const string &label, ItemContent *item) {
     if (visible_size < max_visible_size) {
         visible_size++;
     }
     full_list.push_back(new ListMenuItem(label, item));
 }
 
-ItemContent *ListMenu::getChosenItem() const {
+ItemContent *ListPanel::getChosenItem() const {
     int index = 0;
     for (auto it = full_list.begin(); it != full_list.end(); ++it, ++index) {
         if (index == first_visible_item + highlighted) {
@@ -125,11 +125,11 @@ ItemContent *ListMenu::getChosenItem() const {
     return nullptr;
 }
 
-ListMenu::~ListMenu() {
+ListPanel::~ListPanel() {
     cleanScreen();
 }
 
-void ListMenu::cleanScreen() {
+void ListPanel::cleanScreen() {
     for_each(full_list.begin(), full_list.end(), [](ListMenuItem* item){
         delete item;
     });
@@ -139,17 +139,17 @@ void ListMenu::cleanScreen() {
     visible_size = 0;
 }
 
-bool ListMenu::handleEnter() {
+bool ListPanel::handleEnter() {
     return true;
 }
 
-void ListMenu::preRenderItem(ListMenuItem *item) {
+void ListPanel::preRenderItem(ListMenuItem *item) {
 }
 
-void ListMenu::postRenderItem(ListMenuItem *item) {
+void ListPanel::postRenderItem(ListMenuItem *item) {
 }
 
-void ListMenu::sortItems() {
+void ListPanel::sortItems() {
     full_list.sort([](ListMenuItem* litem, ListMenuItem *ritem){
         return litem->getLabel().compare(ritem->getLabel()) < 0;
     });

@@ -2,7 +2,7 @@
 // Created by magupov on 21.08.18.
 //
 
-#include "Window.h"
+#include "MainWindow.h"
 
 #include <string>
 
@@ -11,12 +11,12 @@
 
 using std::string;
 
-Window::Window(int width, int height, int startx, int starty)
+MainWindow::MainWindow(int width, int height, int startx, int starty)
     : Widget (width, height, startx, starty), analyser(nullptr) {
 
 }
 
-Window::~Window() {
+MainWindow::~MainWindow() {
     if (analyser) {
         delete analyser;
     }
@@ -33,7 +33,7 @@ Window::~Window() {
  * |    Buttons description
  * +------------
  */
-void Window::render() {
+void MainWindow::render() {
     drawFrame();
     if (!header.empty()) {
         drawLine(1, 0, header.substr(0, width-2));
@@ -64,7 +64,7 @@ void Window::render() {
     Widget::render();
 }
 
-bool Window::run() {
+bool MainWindow::run() {
     bool result = false;
     bool exit = false;
     while (!exit) {
@@ -81,7 +81,7 @@ bool Window::run() {
     return result;
 }
 
-void Window::openFile(const std::string &fileName) {
+void MainWindow::openFile(const std::string &fileName) {
     if (fileName.empty()) {
         header = "Need to choose file";
         return;

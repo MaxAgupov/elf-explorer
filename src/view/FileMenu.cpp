@@ -15,7 +15,7 @@ using namespace std;
 using std::string;
 
 FileMenu::FileMenu(int width, int height, int startx, int starty)
-    : ListMenu(width, height, startx, starty) {
+    : ListPanel(width, height, startx, starty) {
     size_t dir_size = 256;
     char *res_buf = nullptr;
     do {
@@ -42,7 +42,7 @@ FileMenu::~FileMenu() {
 
 bool FileMenu::run() {
 
-    bool res = ListMenu::run();
+    bool res = ListPanel::run();
     return res;
 }
 

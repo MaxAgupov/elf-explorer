@@ -9,10 +9,10 @@
 
 class Analyser;
 
-class Window : public Widget {
+class MainWindow : public Widget {
 public:
-    Window(int width, int height, int startx, int starty);
-    virtual ~Window();
+    MainWindow(int width, int height, int startx, int starty);
+    virtual ~MainWindow();
 
     virtual bool run();
     virtual void render();

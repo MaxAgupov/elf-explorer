@@ -6,7 +6,7 @@
 
 #include "DisplayManager.h"
 #include <view/NCurses.h>
-#include <view/Window.h>
+#include <view/MainWindow.h>
 #include <view/FileMenu.h>
 
 DisplayManager::DisplayManager() {
@@ -23,7 +23,7 @@ void DisplayManager::show() {
 
     std::string analysed_file_name;
 
-    Window *win = new Window(ncurses->screen_width(), ncurses->screen_height(), 0, 0);
+    MainWindow *win = new MainWindow(ncurses->screen_width(), ncurses->screen_height(), 0, 0);
 
     do {
         win->render();

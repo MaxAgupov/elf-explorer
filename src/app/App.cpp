@@ -6,7 +6,7 @@
 #include <view/NCurses.h>
 
 #include <view/FileMenu.h>
-#include <view/Window.h>
+#include <view/MainWindow.h>
 #include <view/DisplayManager.h>
 
 #include <string>
