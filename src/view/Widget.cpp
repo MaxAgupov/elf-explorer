@@ -8,7 +8,7 @@
 Widget::Widget(int width, int height, int startx, int starty)
         : width(width), height(height), startx(startx), starty(starty) {
     widget = newwin(height, width, starty, startx);
-    drawFrame();
+//    drawFrame();
     keypad(widget, true);
 }
 

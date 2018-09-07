@@ -21,6 +21,7 @@ ListMenu::ListMenu(int width, int height, int startx, int starty)
 }
 
 void ListMenu::render() {
+    drawFrame();
     int index = 0;
     for (auto it = full_list.begin(); it != full_list.end(); ++it, ++index) {
         if (index >= first_visible_item) {
@@ -28,7 +29,6 @@ void ListMenu::render() {
                 onAttribute(A_REVERSE);
             }
             preRenderItem(*it);
-//            mvwprintw(menu, index -first_visible_item + 1, 1, (*it)->getLabel(width-2).c_str());
             drawLine(1, index -first_visible_item + 1, (*it)->getLabel(width-2));
             postRenderItem(*it);
             offAttribute(A_REVERSE);
@@ -40,15 +40,14 @@ void ListMenu::render() {
 
     if (visible_size != max_visible_size) {
         for (int i = visible_size+1; i <= max_visible_size; ++i) {
-//            mvwprintw(menu, i, 1, string(width-2, ' ').c_str());
             drawLine(1, i, string(width-2, ' '));
         }
     }
 
     // control buttons
     onAttribute(A_REVERSE);
-//    mvwprintw(menu, height - 2, 1, (string ("<Enter>-Choose | F10-Exit") + string(width - 2 - 25, ' ')).c_str());
-    drawLine(1, height - 2, (string ("<Enter>-Choose | F10-Exit") + string(width - 2 - 25, ' ')));
+    string descr = "<Enter>-Choose | <F10>-Exit";
+    drawLine(1, height - 2, (descr + string(width - 2 - descr.size(), ' ')));
     offAttribute(A_REVERSE);
 
     Menu::render();
