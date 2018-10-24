@@ -5,16 +5,15 @@
 #include <string>
 
 #include "DisplayManager.h"
-#include <view/NCurses.h>
 #include <view/MainWindow.h>
 #include <view/FileMenu.h>
 
 DisplayManager::DisplayManager() {
-    ncurses = new NCurses();
+    initNcurses();
 }
 
 DisplayManager::~DisplayManager() {
-    delete ncurses;
+    endNcurses();
 }
 
 void DisplayManager::show() {
@@ -23,7 +22,7 @@ void DisplayManager::show() {
 
     std::string analysed_file_name;
 
-    MainWindow *win = new MainWindow(ncurses->screen_width(), ncurses->screen_height(), 0, 0);
+    MainWindow *win = new MainWindow(screen_width(), screen_height(), 0, 0);
 
     do {
         win->render();
@@ -48,9 +47,10 @@ void DisplayManager::show() {
 }
 
 void DisplayManager::chooseFile(std::string &chosen_file) {
-    FileMenu *menu = new FileMenu(ncurses->screen_width()/2,
-                                  ncurses->screen_height(),
-                                  ncurses->screen_width()/4, 0);
+    FileMenu *menu = new FileMenu(screen_width()/2,
+                                  screen_height(),
+                                  screen_width()/4,
+                                  0);
     bool result = menu->run();
     if (result) {
         chosen_file = menu->getChosenFileName();
@@ -58,3 +58,25 @@ void DisplayManager::chooseFile(std::string &chosen_file) {
     delete menu;
 }
 
+void DisplayManager::initNcurses(){
+    initscr();
+    noecho();
+    cbreak();
+    raw();
+    curs_set(0);
+    keypad(stdscr, true);
+
+    refresh();
+}
+
+void DisplayManager::endNcurses() {
+    endwin();
+}
+
+int DisplayManager::screen_width() const {
+    return COLS;
+}
+
+int DisplayManager::screen_height() const {
+    return LINES;
+}

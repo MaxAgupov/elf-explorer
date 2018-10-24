@@ -3,10 +3,7 @@
 //
 
 #include "App.h"
-#include <view/NCurses.h>
 
-#include <view/FileMenu.h>
-#include <view/MainWindow.h>
 #include <view/DisplayManager.h>
 
 #include <string>

@@ -7,9 +7,6 @@
 
 #include <string>
 
-class NCurses;
-
-
 class DisplayManager {
 public:
     DisplayManager();
@@ -21,7 +18,11 @@ protected:
     void chooseFile(std::string &chosen_file);
 
 private:
-    NCurses *ncurses;
+    void initNcurses();
+    void endNcurses();
+
+    int screen_width() const;
+    int screen_height() const;
 };
 
 
