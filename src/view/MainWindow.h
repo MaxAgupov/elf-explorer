@@ -8,6 +8,7 @@
 #include <view/Widget.h>
 
 class Analyser;
+class ListPanel;
 
 class MainWindow : public Widget {
 public:
@@ -20,8 +21,13 @@ public:
     void openFile(const std::string &fileName);
 
 protected:
+    void drawHeader();
+    void drawButtons();
+
+protected:
     std::string header;
     Analyser *analyser;
+    ListPanel *leftPanel;
 };
 
 

@@ -17,7 +17,6 @@ ListPanel::ListPanel(int width, int height, int startx, int starty)
     highlighted = 0;
 
     chosen_item = full_list.end();
-
 }
 
 void ListPanel::render() {

@@ -54,7 +54,6 @@ public:
 
     ItemContent *getChosenItem() const;
 
-protected:
     void addItem(const std::string &label, ItemContent *item);
 
     virtual void handleUp();
@@ -69,10 +68,8 @@ protected:
 
     virtual void postRenderItem(ListMenuItem* item);
 
-protected:
     void cleanScreen();
 
-private:
     void render();
 
 protected:
