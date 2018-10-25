@@ -12,7 +12,7 @@ using namespace std;
 ListPanel::ListPanel(int width, int height, int startx, int starty)
  : Widget(width, height, startx, starty) {
     first_visible_item = 0;
-    max_visible_size = height - 3;
+    max_visible_size = height - 2;
     visible_size = 0;
     highlighted = 0;
 
@@ -42,14 +42,7 @@ void ListPanel::render() {
             drawLine(1, i, string(width-2, ' '));
         }
     }
-
-    // control buttons
-    onAttribute(A_REVERSE);
-    string descr = "<Enter>-Choose | <F10>-Exit";
-    drawLine(1, height - 2, (descr + string(width - 2 - descr.size(), ' ')));
-    offAttribute(A_REVERSE);
-
-    Widget::render();
+    Widget::refresh();
 }
 
 void ListPanel::handleUp() {
@@ -134,14 +127,6 @@ void ListPanel::processKeyboard(int Key) {
         case KEY_DOWN:
             handleDown();
             break;
-//        case '\n':
-//        case KEY_ENTER:
-//            if (handleEnter()) {
-//                isVisible = false;
-//            }
-//            break;
-//        case KEY_F(10):
-//            isVisible = false;
         default:
             break;
     }

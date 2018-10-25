@@ -41,11 +41,11 @@ FileMenu::~FileMenu() {
 }
 
 bool FileMenu::run() {
-    ListPanel::render();
 
     bool result = false;
     bool exit = false;
     while (!exit) {
+        render();
         int ch = getCh();
         ListPanel::processKeyboard(ch);
         switch(ch) {
@@ -61,7 +61,6 @@ bool FileMenu::run() {
             default:
                 break;
         }
-        ListPanel::render();
     }
     return result;
 }
@@ -176,5 +175,17 @@ std::string FileMenu::getChosenFileName() const {
     }
 
     return current_dir + "/" + entry->name;
+}
+
+void FileMenu::render() {
+    ListPanel::render();
+
+    // control buttons
+    onAttribute(A_REVERSE);
+    string descr = "<Enter>-Choose | <F10>-Exit";
+    drawLine(1, height - 1, (descr + string(width - 2 - descr.size(), ' ')));
+    offAttribute(A_REVERSE);
+
+    Widget::refresh();
 }
 

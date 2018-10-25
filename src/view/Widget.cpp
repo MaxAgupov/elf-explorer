@@ -8,7 +8,6 @@
 Widget::Widget(int width, int height, int startx, int starty)
         : width(width), height(height), startx(startx), starty(starty) {
     widget = newwin(height, width, starty, startx);
-//    drawFrame();
     keypad(widget, true);
 }
 
@@ -16,7 +15,7 @@ Widget::~Widget() {
     delwin(widget);
 }
 
-void Widget::render() {
+void Widget::refresh() {
     wrefresh(widget);
 }
 
@@ -34,7 +33,6 @@ void Widget::drawLine(int x_pos, int y_pos, const std::string &line) {
 
 int Widget::getCh() {
     return getch();
-//    return wgetch(widget);
 }
 
 void Widget::drawFrame() {

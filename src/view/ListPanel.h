@@ -68,7 +68,7 @@ public:
 
     void cleanScreen();
 
-    void render();
+    virtual void render();
 
     void processKeyboard(int Key);
 

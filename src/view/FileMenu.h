@@ -29,6 +29,9 @@ public:
 protected:
     void load_directory_content(std::string dir_name);
 
+public:
+    void render();
+
 protected:
     void preRenderItem(ListMenuItem *item);
     void postRenderItem(ListMenuItem *item);

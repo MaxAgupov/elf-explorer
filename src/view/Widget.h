@@ -14,7 +14,7 @@ public:
 
     virtual ~Widget();
 
-    virtual void render();
+    void refresh();
 
     void onAttribute(unsigned long attr);
     void offAttribute(unsigned long attr);

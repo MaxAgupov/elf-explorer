@@ -40,9 +40,9 @@ void MainWindow::render() {
     drawHeader();
 
     drawButtons();
-
-    Widget::render();
+    Widget::refresh();
     leftPanel->render();
+
 }
 
 void MainWindow::drawButtons() {
