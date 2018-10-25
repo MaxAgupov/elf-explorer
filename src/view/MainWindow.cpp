@@ -53,23 +53,6 @@ void MainWindow::drawButtons() {
     offAttribute(A_REVERSE);
 }
 
-bool MainWindow::run() {
-    bool result = false;
-    bool exit = false;
-    while (!exit) {
-        render();
-        switch(getCh()) {
-            case KEY_F(10):
-                exit = true;
-                result = true;
-                break;
-            default:
-                break;
-        }
-    }
-    return result;
-}
-
 void MainWindow::openFile(const std::string &fileName) {
     if (fileName.empty()) {
         header = "Need to choose file";

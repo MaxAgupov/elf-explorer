@@ -14,7 +14,6 @@ public:
 
     virtual ~Widget();
 
-    virtual bool run() = 0;
     virtual void render();
 
     void onAttribute(unsigned long attr);

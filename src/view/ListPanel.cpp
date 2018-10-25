@@ -10,7 +10,7 @@
 using namespace std;
 
 ListPanel::ListPanel(int width, int height, int startx, int starty)
- : Widget(width, height, startx, starty), isVisible(false) {
+ : Widget(width, height, startx, starty) {
     first_visible_item = 0;
     max_visible_size = height - 3;
     visible_size = 0;
@@ -20,7 +20,6 @@ ListPanel::ListPanel(int width, int height, int startx, int starty)
 }
 
 void ListPanel::render() {
-    isVisible = true;
     drawFrame();
     int index = 0;
     for (auto it = full_list.begin(); it != full_list.end(); ++it, ++index) {
@@ -51,35 +50,6 @@ void ListPanel::render() {
     offAttribute(A_REVERSE);
 
     Widget::render();
-}
-
-bool ListPanel::run() {
-    isVisible = true;
-    bool result = false;
-    bool exit = false;
-    while (!exit) {
-        render();
-        switch(getCh()) {
-            case KEY_UP:
-                handleUp();
-                break;
-            case KEY_DOWN:
-                handleDown();
-                break;
-            case '\n':
-            case KEY_ENTER:
-                result = handleEnter();
-                if (result) {
-                    exit = true;
-                }
-                break;
-            case KEY_F(10):
-                exit = true;
-            default:
-                break;
-        }
-    }
-    return result;
 }
 
 void ListPanel::handleUp() {
@@ -164,22 +134,19 @@ void ListPanel::processKeyboard(int Key) {
         case KEY_DOWN:
             handleDown();
             break;
-        case '\n':
-        case KEY_ENTER:
-            if (handleEnter()) {
-                isVisible = false;
-            }
-            break;
-        case KEY_F(10):
-            isVisible = false;
+//        case '\n':
+//        case KEY_ENTER:
+//            if (handleEnter()) {
+//                isVisible = false;
+//            }
+//            break;
+//        case KEY_F(10):
+//            isVisible = false;
         default:
             break;
     }
 }
 
-bool ListPanel::isDisplayed() const {
-    return isVisible;
-}
 
 ListMenuItem::ListMenuItem(const std::string &full_label, ItemContent *content)
     : full_label(full_label), content(content){

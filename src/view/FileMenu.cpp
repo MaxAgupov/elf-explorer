@@ -41,9 +41,29 @@ FileMenu::~FileMenu() {
 }
 
 bool FileMenu::run() {
+    ListPanel::render();
 
-    bool res = ListPanel::run();
-    return res;
+    bool result = false;
+    bool exit = false;
+    while (!exit) {
+        int ch = getCh();
+        ListPanel::processKeyboard(ch);
+        switch(ch) {
+            case '\n':
+            case KEY_ENTER:
+                result = handleEnter();
+                if (result) {
+                    exit = true;
+                }
+                break;
+            case KEY_F(10):
+                exit = true;
+            default:
+                break;
+        }
+        ListPanel::render();
+    }
+    return result;
 }
 
 void FileMenu::load_directory_content(string dir_name) {

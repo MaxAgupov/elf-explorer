@@ -15,7 +15,6 @@ public:
     MainWindow(int width, int height, int startx, int starty);
     virtual ~MainWindow();
 
-    virtual bool run();
     virtual void render();
 
     void openFile(const std::string &fileName);

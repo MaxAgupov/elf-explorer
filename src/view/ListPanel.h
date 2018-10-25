@@ -50,8 +50,6 @@ public:
     ListPanel(int width, int height, int startx, int starty);
     virtual ~ListPanel();
 
-    bool run();
-
     ItemContent *getChosenItem() const;
 
     void addItem(const std::string &label, ItemContent *item);
@@ -74,8 +72,6 @@ public:
 
     void processKeyboard(int Key);
 
-    bool isDisplayed() const;
-
 protected:
     std::list<ListMenuItem*> full_list;
     std::list<ListMenuItem*>::iterator chosen_item;
@@ -84,8 +80,6 @@ protected:
     int max_visible_size;
     int visible_size;
     int highlighted;
-
-    bool isVisible;
 };
 
 
