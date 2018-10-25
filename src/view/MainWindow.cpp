@@ -99,3 +99,11 @@ void MainWindow::drawHeader() {
         drawLine(1, 0, header.substr(0, width-2));
     }
 }
+
+void MainWindow::processKeyboard(int Key) {
+    leftPanel->processKeyboard(Key);
+    switch(Key) {
+        default:
+            break;
+    }
+}

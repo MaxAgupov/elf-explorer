@@ -27,9 +27,8 @@ public:
     std::string getChosenFileName() const;
 
 protected:
-
-
     void load_directory_content(std::string dir_name);
+
 protected:
     void preRenderItem(ListMenuItem *item);
     void postRenderItem(ListMenuItem *item);

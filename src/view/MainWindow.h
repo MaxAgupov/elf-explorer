@@ -20,6 +20,8 @@ public:
 
     void openFile(const std::string &fileName);
 
+    void processKeyboard(int Key);
+
 protected:
     void drawHeader();
     void drawButtons();

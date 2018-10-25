@@ -72,6 +72,10 @@ public:
 
     void render();
 
+    void processKeyboard(int Key);
+
+    bool isDisplayed() const;
+
 protected:
     std::list<ListMenuItem*> full_list;
     std::list<ListMenuItem*>::iterator chosen_item;
@@ -81,6 +85,7 @@ protected:
     int visible_size;
     int highlighted;
 
+    bool isVisible;
 };
 
 

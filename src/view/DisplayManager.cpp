@@ -31,7 +31,9 @@ void DisplayManager::show() {
             chooseFile(analysed_file_name);
             win->openFile(analysed_file_name);
         } else {
-            switch (win->getCh()) {
+            int ch = win->getCh();
+            win->processKeyboard(ch);
+            switch (ch) {
                 case KEY_F(2):
                     choose_file = true;
                     break;
