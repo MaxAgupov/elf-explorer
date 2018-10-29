@@ -16,16 +16,16 @@ Elf32::~Elf32() {
 
 }
 
-void Elf32::getHeaderList(std::vector<std::string> &headerList) {
+std::string Elf32::getHeaderList(std::vector<std::string> &headerList) {
     std::ifstream f(file_name, std::ios::out | std::ios::binary);
 
     if (!f.is_open()) {
-        return;
+        return "";
     }
     Elf32_Ehdr hdr;
     f.read((char*) &hdr, sizeof(hdr));
     f.close();
 
-    ElfHeader<Elf32_Ehdr> header(hdr);
+    ElfHeader<Elf32_Ehdr> header(&hdr);
     header.toString(headerList);
 }

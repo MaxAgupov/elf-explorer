@@ -12,7 +12,7 @@ public:
     Elf32(const std::string &FileName);
     virtual ~Elf32();
 
-    void getHeaderList(std::vector<std::string> &headerList);
+    std::string getHeaderList(std::vector<std::string> &headerList);
 };
 
 

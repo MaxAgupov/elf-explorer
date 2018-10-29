@@ -15,7 +15,7 @@
 template <class HeaderType>
 class ElfHeader {
 public:
-    ElfHeader(HeaderType Header);
+    ElfHeader(HeaderType *Header);
 
     void toString(std::vector<std::string> &stringList);
 
@@ -26,11 +26,11 @@ public:
     std::string getMachineString() const;
 
 private:
-    HeaderType header;
+    HeaderType *header;
 };
 
 template<class HeaderType>
-ElfHeader<HeaderType>::ElfHeader(HeaderType Header) {
+ElfHeader<HeaderType>::ElfHeader(HeaderType *Header) {
     header = Header;
 }
 
@@ -41,50 +41,50 @@ void ElfHeader<HeaderType>::toString(std::vector<std::string> &stringList) {
     stringList.push_back(std::string(output_line));
     snprintf(output_line, 256, "Data: %s", getDataString().c_str());
     stringList.push_back(std::string(output_line));
-    snprintf(output_line, 256, "Version: %d", (int)header.e_ident[EI_VERSION]);
+    snprintf(output_line, 256, "Version: %d", (int)header->e_ident[EI_VERSION]);
     stringList.push_back(std::string(output_line));
     snprintf(output_line, 256, "OS/ABI: %s", getOSAbiString().c_str());
     stringList.push_back(std::string(output_line));
-    snprintf(output_line, 256, "ABI Version: %d", (int)header.e_ident[EI_ABIVERSION]);
+    snprintf(output_line, 256, "ABI Version: %d", (int)header->e_ident[EI_ABIVERSION]);
     stringList.push_back(std::string(output_line));
     snprintf(output_line, 256, "Type: %s", getFileTypeString().c_str());
     stringList.push_back(std::string(output_line));
     snprintf(output_line, 256, "Machine: %s", getMachineString().c_str());
     stringList.push_back(std::string(output_line));
-    snprintf(output_line, 256, "Version: %d", header.e_version);
+    snprintf(output_line, 256, "Version: %d", header->e_version);
     stringList.push_back(std::string(output_line));
 
     std::ostringstream entry;
-    entry<<"Entry point address: 0x"<<std::hex<<header.e_entry;
+    entry<<"Entry point address: "<<std::hex<<std::showbase<<header->e_entry;
     stringList.push_back(entry.str());
 
     std::ostringstream phoff;
-    phoff<<"Start of program headers: "<<header.e_phoff;
+    phoff<<"Start of program headers: "<<header->e_phoff;
     stringList.push_back(phoff.str());
 
     std::ostringstream shoff;
-    shoff<<"Start of section headers: "<<header.e_shoff;
+    shoff<<"Start of section headers: "<<header->e_shoff;
     stringList.push_back(shoff.str());
 
-    snprintf(output_line, 256, "Flags: %u", header.e_flags);
+    snprintf(output_line, 256, "Flags: %u", header->e_flags);
     stringList.push_back(std::string(output_line));
-    snprintf(output_line, 256, "Size of this header: %hu (bytes)", header.e_ehsize);
+    snprintf(output_line, 256, "Size of this header: %hu (bytes)", header->e_ehsize);
     stringList.push_back(std::string(output_line));
-    snprintf(output_line, 256, "Size of program headers: %hu (bytes)", header.e_phentsize);
+    snprintf(output_line, 256, "Size of program headers: %hu (bytes)", header->e_phentsize);
     stringList.push_back(std::string(output_line));
-    snprintf(output_line, 256, "Number of program headers: %hu", header.e_phnum);
+    snprintf(output_line, 256, "Number of program headers: %hu", header->e_phnum);
     stringList.push_back(std::string(output_line));
-    snprintf(output_line, 256, "Size of section headers: %hu (bytes)", header.e_shentsize);
+    snprintf(output_line, 256, "Size of section headers: %hu (bytes)", header->e_shentsize);
     stringList.push_back(std::string(output_line));
-    snprintf(output_line, 256, "Number of section headers: %hu", header.e_shnum);
+    snprintf(output_line, 256, "Number of section headers: %hu", header->e_shnum);
     stringList.push_back(std::string(output_line));
-    snprintf(output_line, 256, "Section header string table index: %hu", header.e_shstrndx);
+    snprintf(output_line, 256, "Section header string table index: %hu", header->e_shstrndx);
     stringList.push_back(std::string(output_line));
 }
 
 template<class HeaderType>
 std::string ElfHeader<HeaderType>::getClassString() const {
-    switch (header.e_ident[EI_CLASS]) {
+    switch (header->e_ident[EI_CLASS]) {
         case ELFCLASSNONE:
             return "Invalid";
         case ELFCLASS32:
@@ -97,7 +97,7 @@ std::string ElfHeader<HeaderType>::getClassString() const {
 
 template<class HeaderType>
 std::string ElfHeader<HeaderType>::getDataString() const {
-    switch (header.e_ident[EI_DATA]) {
+    switch (header->e_ident[EI_DATA]) {
         case ELFDATANONE:
             return "Invalid encoding";
         case ELFDATA2LSB:
@@ -110,7 +110,7 @@ std::string ElfHeader<HeaderType>::getDataString() const {
 
 template<class HeaderType>
 std::string ElfHeader<HeaderType>::getOSAbiString() const {
-    switch (header.e_ident[EI_OSABI]) {
+    switch (header->e_ident[EI_OSABI]) {
         case ELFOSABI_SYSV:
             return  "UNIX System V ABI";
         case ELFOSABI_HPUX:
@@ -146,7 +146,7 @@ std::string ElfHeader<HeaderType>::getOSAbiString() const {
 
 template<class HeaderType>
 std::string ElfHeader<HeaderType>::getFileTypeString() const {
-    switch (header.e_type) {
+    switch (header->e_type) {
         case ET_NONE:
             return "No file type";
         case ET_REL:
@@ -173,7 +173,7 @@ std::string ElfHeader<HeaderType>::getFileTypeString() const {
 
 template<class HeaderType>
 std::string ElfHeader<HeaderType>::getMachineString() const {
-    switch(header.e_machine) {
+    switch(header->e_machine) {
         case EM_NONE:
             return "No machine";
         case EM_M32:

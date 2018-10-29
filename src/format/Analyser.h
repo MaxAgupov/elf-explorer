@@ -13,7 +13,7 @@ public:
     Analyser(const std::string &fileName);
     virtual ~Analyser();
 
-    virtual void getHeaderList(std::vector<std::string> &headerList) = 0;
+    virtual std::string getHeaderList(std::vector<std::string> &headerList) = 0;
 
 protected:
     std::string file_name;
