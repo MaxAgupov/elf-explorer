@@ -17,6 +17,10 @@ public:
 
 protected:
     std::string file_name;
+    size_t file_size;
+    int fd;
+    std::string possible_error;
+    void *mem;
 };
 
 

@@ -16,11 +16,6 @@ public:
 
     std::string getHeaderList(std::vector<std::string> &headerList);
     virtual ~Elf64();
-private:
-    int fd;
-    std::string possible_error;
-    size_t file_size;
-    void *mem;
 
 };
 
