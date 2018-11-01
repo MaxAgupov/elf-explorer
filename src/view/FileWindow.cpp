@@ -2,7 +2,7 @@
 // Created by Maxim Agupov on 12.08.2018.
 //
 
-#include "FileMenu.h"
+#include "FileWindow.h"
 #include <unistd.h>
 #include <errno.h>
 #include <dirent.h>
@@ -14,7 +14,7 @@ using namespace std;
 
 using std::string;
 
-FileMenu::FileMenu(int width, int height, int startx, int starty)
+FileWindow::FileWindow(int width, int height, int startx, int starty)
     : ListPanel(width, height, startx, starty) {
     size_t dir_size = 256;
     char *res_buf = nullptr;
@@ -36,12 +36,11 @@ FileMenu::FileMenu(int width, int height, int startx, int starty)
     }
 }
 
-FileMenu::~FileMenu() {
+FileWindow::~FileWindow() {
     clearContent();
 }
 
-bool FileMenu::run() {
-
+bool FileWindow::run() {
     bool result = false;
     bool exit = false;
     while (!exit) {
@@ -65,7 +64,7 @@ bool FileMenu::run() {
     return result;
 }
 
-void FileMenu::load_directory_content(string dir_name) {
+void FileWindow::load_directory_content(string dir_name) {
     DIR *dir = opendir(dir_name.c_str());
     if (dir == NULL) {
         return;
@@ -89,7 +88,7 @@ void FileMenu::load_directory_content(string dir_name) {
     sortItems();
 }
 
-bool FileMenu::handleEnter() {
+bool FileWindow::handleEnter() {
     DirEntry *entry = dynamic_cast<DirEntry*>(getChosenItem());
 
     if (entry == nullptr) {
@@ -118,7 +117,7 @@ bool FileMenu::handleEnter() {
     return false;
 }
 
-void FileMenu::clearContent() {
+void FileWindow::clearContent() {
     cleanScreen();
     for (auto it = content.begin(); it != content.end(); ++it) {
         delete (*it);
@@ -126,7 +125,7 @@ void FileMenu::clearContent() {
     content.clear();
 }
 
-void FileMenu::preRenderItem(ListMenuItem *item) {
+void FileWindow::preRenderItem(ListMenuItem *item) {
     DirEntry *entry = dynamic_cast<DirEntry*>(item->getContent());
 
     if (entry == nullptr) {
@@ -137,11 +136,11 @@ void FileMenu::preRenderItem(ListMenuItem *item) {
     }
 }
 
-void FileMenu::postRenderItem(ListMenuItem *item) {
+void FileWindow::postRenderItem(ListMenuItem *item) {
     offAttribute(A_BOLD);
 }
 
-void FileMenu::sortItems() {
+void FileWindow::sortItems() {
     full_list.sort([](ListMenuItem* lv, ListMenuItem *rv) {
         if (lv->getLabel() == "..") {
             return true;
@@ -167,7 +166,7 @@ void FileMenu::sortItems() {
     });
 }
 
-std::string FileMenu::getChosenFileName() const {
+std::string FileWindow::getChosenFileName() const {
     DirEntry *entry = dynamic_cast<DirEntry*>(getChosenItem());
 
     if (entry == nullptr) {
@@ -177,7 +176,7 @@ std::string FileMenu::getChosenFileName() const {
     return current_dir + "/" + entry->name;
 }
 
-void FileMenu::render() {
+void FileWindow::render() {
     ListPanel::render();
 
     // control buttons

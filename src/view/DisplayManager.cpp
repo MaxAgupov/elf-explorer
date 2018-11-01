@@ -6,7 +6,7 @@
 
 #include "DisplayManager.h"
 #include <view/MainWindow.h>
-#include <view/FileMenu.h>
+#include <view/FileWindow.h>
 
 DisplayManager::DisplayManager() {
     initNcurses();
@@ -49,7 +49,7 @@ void DisplayManager::show() {
 }
 
 void DisplayManager::chooseFile(std::string &chosen_file) {
-    FileMenu *menu = new FileMenu(screen_width()/2,
+    FileWindow *menu = new FileWindow(screen_width()/2,
                                   screen_height(),
                                   screen_width()/4,
                                   0);

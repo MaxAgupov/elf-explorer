@@ -17,11 +17,11 @@ public:
 };
 
 
-class FileMenu : public ListPanel {
+class FileWindow : public ListPanel {
 public:
-    FileMenu(int width, int height, int startx, int starty);
+    FileWindow(int width, int height, int startx, int starty);
 
-    ~FileMenu();
+    ~FileWindow();
 
     bool run();
     std::string getChosenFileName() const;

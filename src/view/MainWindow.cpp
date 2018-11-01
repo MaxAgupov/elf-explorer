@@ -9,6 +9,7 @@
 #include <format/Analyser.h>
 #include <format/FormatFactory.h>
 #include <view/ListPanel.h>
+#include <view/ErrorWindow.h>
 
 using std::string;
 
@@ -67,11 +68,17 @@ void MainWindow::openFile(const std::string &fileName) {
     analyser = FormatFactory::createAnalyser(fileName);
     if (analyser) {
         std::vector<string> content;
-        analyser->getHeaderList(content);
-        leftPanel->cleanScreen();
-        for (auto it = content.begin(); it != content.end(); ++it) {
-            leftPanel->addItem(*it, nullptr);
+        std::string error = analyser->getHeaderList(content);
+        if (error.empty()) {
+            leftPanel->cleanScreen();
+            for (auto it = content.begin(); it != content.end(); ++it) {
+                leftPanel->addItem(*it, nullptr);
+            }
+        } else {
+            auto errorWindow = new ErrorWindow(error, 100, 5, 10, 10);
+            errorWindow->run();
         }
+
     } else {
         header = "Format isn't supported";
     }
