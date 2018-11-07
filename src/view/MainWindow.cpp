@@ -15,11 +15,17 @@ using std::string;
 
 MainWindow::MainWindow(int width, int height, int startx, int starty)
     : Widget (width, height, startx, starty), analyser(nullptr) {
-    leftPanel = new ListPanel(width/2-2, height-2, startx+1, starty+1);
+    leftPanel = new ListPanel(width/2-1, height-2, startx+1, starty+1);
+    rightPanel = new ListPanel(width/2-1, height-2, startx+1+width/2, starty+1);
+    tabLoop.push_back(leftPanel);
+    tabLoop.push_back(rightPanel);
+    currentTabIt = tabLoop.begin();
 }
 
 MainWindow::~MainWindow() {
+    tabLoop.clear();
     delete leftPanel;
+    delete rightPanel;
     if (analyser) {
         delete analyser;
     }
@@ -43,6 +49,7 @@ void MainWindow::render() {
     drawButtons();
     Widget::refresh();
     leftPanel->render();
+    rightPanel->render();
 
 }
 
@@ -91,7 +98,12 @@ void MainWindow::drawHeader() {
 }
 
 void MainWindow::processKeyboard(int Key) {
-    leftPanel->processKeyboard(Key);
+    if (Key == '\t') {
+        if ( ++currentTabIt == tabLoop.end()) {
+            currentTabIt = tabLoop.begin();
+        }
+    }
+    (*currentTabIt)->processKeyboard(Key);
     switch(Key) {
         default:
             break;

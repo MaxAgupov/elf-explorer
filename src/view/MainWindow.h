@@ -5,6 +5,8 @@
 #ifndef ELF_EXPLORER_WINDOW_H
 #define ELF_EXPLORER_WINDOW_H
 
+#include <list>
+
 #include <view/Widget.h>
 
 class Analyser;
@@ -29,6 +31,9 @@ protected:
     std::string header;
     Analyser *analyser;
     ListPanel *leftPanel;
+    ListPanel *rightPanel;
+    std::list<ListPanel*> tabLoop;
+    std::list<ListPanel*>::iterator currentTabIt;
 };
 
 
